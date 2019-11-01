@@ -1,3 +1,4 @@
+import 'package:afsesab/app/pages/home/post/post_bloc.dart';
 import 'package:afsesab/app/app_module.dart';
 import 'package:afsesab/app/pages/home/home_repository.dart';
 import 'package:afsesab/app/pages/home/home_bloc.dart';
@@ -9,12 +10,14 @@ import 'package:afsesab/app/pages/home/home_page.dart';
 class HomeModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
-        Bloc((i) => HomeBloc()),
+        Bloc((i) => PostBloc()),
+        Bloc((i) => HomeBloc(HomeModule.to.getDependency<HomeRepository>())),
       ];
 
   @override
   List<Dependency> get dependencies => [
-        Dependency((i) => HomeRepository(AppModule.to.getDependency<CustomDio>())),
+        Dependency(
+            (i) => HomeRepository(AppModule.to.getDependency<CustomDio>())),
       ];
 
   @override
